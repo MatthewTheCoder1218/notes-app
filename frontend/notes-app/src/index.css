@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
+
+@layer base {
+  html {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 500;
+  }
+
+  body {
+    background: #fdfeff;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .input-box {
+    @apply w-full text-base bg-transparent border-[1.5px] px-5 py-3 rounded mb-4 outline-none;
+  }
+
+  .btn-primary {
+    @apply w-full text-base bg-primary text-white p-2 rounded my-1 hover:bg-blue-600;
+  }
+  .icon-btn {
+    @apply text-xl text-slate-300 cursor-pointer hover:text-primary;
+  }
+  .input-label {
+    @apply text-xs text-slate-400;
+  }
+}
