@@ -52,7 +52,7 @@ app.post("/create-account", async (req, res) => {
   const isUser = await User.findOne({ email: email });
 
   if (isUser) {
-    return res.json({
+    return res.status(400).json({
       error: true,
       message: "Email already exists. Please use a different email address.",
     });
@@ -110,7 +110,9 @@ app.post("/login", async (req, res) => {
       accessToken,
     });
   } else {
-    return res.json({ error: true, message: "Invalid Credentials" });
+    return res
+      .status(400)
+      .json({ error: true, message: "Invalid Credentials" });
   }
 });
 
@@ -121,7 +123,7 @@ app.get("/get-user", authenticateToken, async (req, res) => {
   const isUser = await User.findOne({ _id: user._id });
 
   if (!isUser) {
-    return res.json({ error: true, message: "User not found" });
+    return res.status(400).json({ error: true, message: "User not found" });
   }
 
   return res.json({
