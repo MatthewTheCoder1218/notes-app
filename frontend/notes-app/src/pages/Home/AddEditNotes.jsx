@@ -3,10 +3,16 @@ import TagInput from "../../components/Input/TagInput";
 import { MdClose } from "react-icons/md";
 import axiosInstance from "../../utils/axiosinstance";
 
-const AddEditNotes = ({ noteData, type, onClose, getAllNotes }) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tags, setTags] = useState([]);
+const AddEditNotes = ({
+  noteData,
+  type,
+  onClose,
+  getAllNotes,
+  showToastMessage,
+}) => {
+  const [title, setTitle] = useState(noteData?.title || "");
+  const [content, setContent] = useState(noteData?.content || "");
+  const [tags, setTags] = useState(noteData?.tags || []);
 
   const [error, setError] = useState(null);
 
@@ -20,6 +26,7 @@ const AddEditNotes = ({ noteData, type, onClose, getAllNotes }) => {
       });
 
       if (res.data && res.data.note) {
+        showToastMessage("Note Added Successfully");
         getAllNotes();
         onClose();
       }
@@ -35,7 +42,31 @@ const AddEditNotes = ({ noteData, type, onClose, getAllNotes }) => {
   };
 
   // To Edit A Note
-  // const editNote = async () => ();
+  const editNote = async () => {
+    const noteId = noteData._id;
+
+    try {
+      const res = await axiosInstance.put("/edit-note/" + noteId, {
+        title,
+        content,
+        tags,
+      });
+
+      if (res.data && res.data.note) {
+        showToastMessage("Note Updated Successfully");
+        getAllNotes();
+        onClose();
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+  };
 
   const handleAddNote = () => {
     if (!title) {
@@ -102,7 +133,7 @@ const AddEditNotes = ({ noteData, type, onClose, getAllNotes }) => {
         className="btn-primary font-medium mt-5 p-3"
         onClick={handleAddNote}
       >
-        ADD
+        {type === "edit" ? "Update" : "ADD"}
       </button>
     </div>
   );
