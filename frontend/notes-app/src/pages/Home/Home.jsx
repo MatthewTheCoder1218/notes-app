@@ -6,8 +6,9 @@ import AddEditNotes from "./AddEditNotes";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosinstance";
-import moment from "moment";
 import Toast from "../../components/ToastMessage/Toast";
+import EmptyCart from "../../components/EmptyCart/EmptyCart";
+import AddNoteImg from "../../assets/images/add-note.png";
 
 const Home = () => {
   const [openAddEditModal, setOpenAddEditModal] = useState({
@@ -70,6 +71,26 @@ const Home = () => {
     }
   };
 
+  const deleteNote = async (data) => {
+    const noteId = data._id;
+    try {
+      const res = await axiosInstance.delete("/delete-note/" + noteId);
+
+      if (res.data && !res.data.error) {
+        showToastMessage("Note Deleted Successfully", "delete");
+        getAllNotes();
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        console.log("Error occurred while trying to fetch notes");
+      }
+    }
+  };
+
   useEffect(() => {
     getAllNotes();
     getUserInfo();
@@ -81,23 +102,34 @@ const Home = () => {
       <Navbar userInfo={userInfo} />
 
       <div className="container mx-auto">
-        <div className="grid grid-cols-3 gap-4 mt-4">
-          {allNotes.map((item, index) => (
-            <NoteCard
-              key={item._id}
-              title={item.title}
-              date={item.createdAt}
-              content={item.content}
-              tags={item.tags}
-              isPinned={item.isPinned}
-              onEdit={() => {
-                handleEdit(item);
-              }}
-              onDelete={() => {}}
-              onPinNote={() => {}}
-            />
-          ))}
-        </div>
+        {allNotes.length > 0 ? (
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            {allNotes.map((item, index) => (
+              <NoteCard
+                key={item._id}
+                title={item.title}
+                date={item.createdAt}
+                content={item.content}
+                tags={item.tags}
+                isPinned={item.isPinned}
+                onEdit={() => {
+                  handleEdit(item);
+                }}
+                onDelete={() => {
+                  deleteNote(item);
+                }}
+                onPinNote={() => {}}
+              />
+            ))}
+          </div>
+        ) : (
+          <EmptyCart
+            imgSrc={AddNoteImg}
+            message={
+              "Start creating your first note. Click the Add button to jot down your thoughts, ideas and reminders. Lets get started!"
+            }
+          />
+        )}
       </div>
 
       <button
