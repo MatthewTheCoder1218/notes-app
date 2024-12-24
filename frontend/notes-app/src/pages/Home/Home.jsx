@@ -26,6 +26,8 @@ const Home = () => {
   const [allNotes, setAllNotes] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
 
+  const [isSearch, setIsSearch] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEdit = (noteDetails) => {
@@ -91,6 +93,46 @@ const Home = () => {
     }
   };
 
+  const onSearchNote = async (query) => {
+    try {
+      const res = await axiosInstance.get("/search-notes", {
+        params: { query },
+      });
+
+      if (res.data && res.data.notes) {
+        setIsSearch(true);
+        setAllNotes(res.data.notes);
+      }
+    } catch (error) {
+      console.log("Error occurred while trying to fetch notes");
+    }
+  };
+
+  const handleClearSearch = () => {
+    setIsSearch(false);
+    getAllNotes();
+  };
+
+  const updateIsPinned = async (noteData) => {
+    const noteId = noteData._id;
+
+    try {
+      const response = await axiosInstance.put(
+        "/update-pinned-note/" + noteId,
+        {
+          isPinned: !noteData.isPinned,
+        }
+      );
+
+      if (response.data && response.data.note) {
+        showToastMessage("Note Updated Successfully");
+        getAllNotes();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getAllNotes();
     getUserInfo();
@@ -99,7 +141,11 @@ const Home = () => {
 
   return (
     <>
-      <Navbar userInfo={userInfo} />
+      <Navbar
+        userInfo={userInfo}
+        onSearchNote={onSearchNote}
+        handleClearSearch={handleClearSearch}
+      />
 
       <div className="container mx-auto">
         {allNotes.length > 0 ? (
@@ -118,7 +164,9 @@ const Home = () => {
                 onDelete={() => {
                   deleteNote(item);
                 }}
-                onPinNote={() => {}}
+                onPinNote={() => {
+                  updateIsPinned(item);
+                }}
               />
             ))}
           </div>

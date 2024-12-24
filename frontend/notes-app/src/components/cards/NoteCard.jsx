@@ -2,6 +2,15 @@ import React from "react";
 import { MdCreate, MdDelete, MdOutlinePushPin } from "react-icons/md";
 import moment from "moment";
 
+// Responsive width handling using CSS media queries
+const responsiveWidthStyles = `
+  @media (max-width: 768px) {
+    .note-card {
+      
+    }
+  }
+`;
+
 const NoteCard = ({
   title,
   date,
@@ -13,7 +22,8 @@ const NoteCard = ({
   onPinNote,
 }) => {
   return (
-    <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out">
+    <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out note-card">
+      <style>{responsiveWidthStyles}</style> {/* Inject responsive styles */}
       <div className="flex items-center justify-between ">
         <div>
           <h6 className="text-lg font-semibold">{title}</h6>
@@ -27,9 +37,7 @@ const NoteCard = ({
           onClick={onPinNote}
         />
       </div>
-
-      <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 60)}</p>
-
+      <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 40)}</p>
       <div className="flex items-center justify-between mt-2">
         <div className="text-sm text-slate-500">
           {tags.map((item) => `#${item} `)}
