@@ -1,7 +1,8 @@
 import axios from "axios";
+require("dotenv").config();
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: process.env.BASE_URL,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
