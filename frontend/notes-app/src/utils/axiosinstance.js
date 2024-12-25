@@ -1,5 +1,8 @@
 import axios from "axios";
-require("dotenv").config();
+import dotenv from "dotenv";
+
+// Load environment variables from .env file
+dotenv.config();
 
 const axiosInstance = axios.create({
   baseURL: process.env.BASE_URL,
