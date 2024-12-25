@@ -18,7 +18,7 @@ const { authenticateToken } = require("./utilities");
 app.use(express.json());
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL, // Replace with your frontend URL
+  origin: "https://notes-app-one-rho.vercel.app/", // Replace with your frontend URL
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed HTTP methods
   credentials: true, // If you need to send cookies or authorization headers
 };
