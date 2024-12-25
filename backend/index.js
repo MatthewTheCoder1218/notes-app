@@ -19,7 +19,7 @@ app.use(express.json());
 
 const corsOptions = {
   origin: [
-    "https://notes-app-one-rho.vercel.app", // Replace with your frontend URL
+    process.env.FRONTEND_URL, // Replace with your frontend URL
     "http://localhost:5173", // Add additional allowed origins if needed
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed HTTP methods
