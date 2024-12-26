@@ -19,7 +19,7 @@ app.use(express.json());
 
 const corsOptions = {
   origin: [
-    "https://notes-app-umber-phi.vercel.app/", // Add additional allowed origins if needed
+    "*", // Add additional allowed origins if needed
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed HTTP methods
   credentials: true, // If you need to send cookies or authorization headers
