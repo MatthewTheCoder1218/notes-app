@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://notes-app-h96b.onrender.com",
+  baseURL: "https://notes-app-0oll.onrender.com",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
