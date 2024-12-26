@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// Load environment variables from .env file
-dotenv.config();
-
 const axiosInstance = axios.create({
   baseURL: "https://notes-app-h96b.onrender.com",
   timeout: 10000,
