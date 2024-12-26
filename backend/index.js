@@ -17,7 +17,7 @@ const { authenticateToken } = require("./utilities");
 
 app.use(express.json());
 
-const frontendUrl = "https://notes-app-umber-phi.vercel.app/";
+const frontendUrl = "https://notes-app-umber-phi.vercel.app";
 
 const corsOptions = {
   origin: frontendUrl, // Replace with your actual frontend URL (e.g., 'https://your-frontend.vercel.app')
