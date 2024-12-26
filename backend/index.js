@@ -18,12 +18,9 @@ const { authenticateToken } = require("./utilities");
 app.use(express.json());
 
 const corsOptions = {
-  origin: [
-    process.env.FRONTEND_URL, // Replace with your frontend URL
-    "http://localhost:5173", // Add additional allowed origins if needed
-  ],
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed HTTP methods
-  credentials: true, // If you need to send cookies or authorization headers
+  origin: "https://notes-app-umber-phi.vercel.app/", // Replace with your actual frontend URL (e.g., 'https://your-frontend.vercel.app')
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // If using cookies or authorization headers
 };
 
 app.use(cors(corsOptions));
