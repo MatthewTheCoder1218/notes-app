@@ -1,11 +1,10 @@
 import axios from "axios";
-import dotenv from "dotenv";
 
 // Load environment variables from .env file
 dotenv.config();
 
 const axiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: "https://notes-app-h96b.onrender.com",
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",
@@ -14,7 +13,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const accessToken = localStorage.getItem("token");
+    const accessToken = window.localStorage.getItem("token");
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
