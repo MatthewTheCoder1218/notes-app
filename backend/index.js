@@ -19,7 +19,7 @@ app.use(express.json());
 
 const corsOptions = {
   origin: [
-    process.env.FRONTEND_URL, // Replace with your frontend URL
+    "https://notes-app-umber-phi.vercel.app/", // Replace with your frontend URL
     "http://localhost:5173", // Add additional allowed origins if needed
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Specify allowed HTTP methods
@@ -27,6 +27,19 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://notes-app-umber-phi.vercel.app/"
+  ); // Replace with your Vercel URL
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // Allow the methods you need
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  ); // Allow necessary headers
+  next();
+});
 
 app.get("/", (req, res) => {
   res.json({ data: "Hello" });
