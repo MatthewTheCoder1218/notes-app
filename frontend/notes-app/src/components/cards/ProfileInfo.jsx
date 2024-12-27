@@ -9,7 +9,9 @@ const ProfileInfo = ({ onLogout, userInfo }) => {
       </div>
 
       <div>
-        <p className="text-sm font-medium">{userInfo?.fullName}</p>
+        <p className="text-sm hidden sm:flex font-medium">
+          {userInfo?.fullName}
+        </p>
         <button
           className="text-sm text-slate-700 underline"
           type="button"
