@@ -22,7 +22,7 @@ const NoteCard = ({
   onPinNote,
 }) => {
   return (
-    <div className="w-full">
+    <div className="flex flex-col items-center">
       <div className="border w-full rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out note-card">
         <div className="flex items-center justify-between ">
           <div>
