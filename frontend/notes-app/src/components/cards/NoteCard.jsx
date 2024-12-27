@@ -22,36 +22,39 @@ const NoteCard = ({
   onPinNote,
 }) => {
   return (
-    <div className="border rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out note-card">
-      <style>{responsiveWidthStyles}</style> {/* Inject responsive styles */}
-      <div className="flex items-center justify-between ">
-        <div>
-          <h6 className="text-lg font-semibold">{title}</h6>
-          <span className="text-xs text-slate-500">
-            {moment(date).format("Do MMM YYYY")}
-          </span>
-        </div>
+    <div className="">
+      <div className="border w-full rounded p-4 bg-white hover:shadow-xl transition-all ease-in-out note-card">
+        <div className="flex items-center justify-between ">
+          <div>
+            <h6 className="text-lg font-semibold">{title}</h6>
+            <span className="text-xs text-slate-500">
+              {moment(date).format("Do MMM YYYY")}
+            </span>
+          </div>
 
-        <MdOutlinePushPin
-          className={`icon-btn ${isPinned ? "text-primary" : "text-slate-300"}`}
-          onClick={onPinNote}
-        />
-      </div>
-      <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 40)}</p>
-      <div className="flex items-center justify-between mt-2">
-        <div className="text-sm text-slate-500">
-          {tags.map((item) => `#${item} `)}
+          <MdOutlinePushPin
+            className={`icon-btn ${
+              isPinned ? "text-primary" : "text-slate-300"
+            }`}
+            onClick={onPinNote}
+          />
         </div>
+        <p className="text-xs text-slate-600 mt-2">{content?.slice(0, 40)}</p>
+        <div className="flex items-center justify-between mt-2">
+          <div className="text-sm text-slate-500">
+            {tags.map((item) => `#${item} `)}
+          </div>
 
-        <div className="flex items-center gap-2">
-          <MdCreate
-            className="icon-btn hover:text-green-600 cursor-pointer"
-            onClick={onEdit}
-          />
-          <MdDelete
-            className="icon-btn hover:text-red-500 cursor-pointer"
-            onClick={onDelete}
-          />
+          <div className="flex items-center gap-2">
+            <MdCreate
+              className="icon-btn hover:text-green-600 cursor-pointer"
+              onClick={onEdit}
+            />
+            <MdDelete
+              className="icon-btn hover:text-red-500 cursor-pointer"
+              onClick={onDelete}
+            />
+          </div>
         </div>
       </div>
     </div>
