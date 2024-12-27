@@ -149,7 +149,7 @@ const Home = () => {
 
       <div className="container mx-auto">
         {allNotes.length > 0 ? (
-          <div className="grid sm:grid-cols-3 gap-4 mt-4">
+          <div className="grid ml-1 mr-1 sm:grid-cols-3 gap-4 mt-4">
             {allNotes.map((item, index) => (
               <NoteCard
                 key={item._id}
