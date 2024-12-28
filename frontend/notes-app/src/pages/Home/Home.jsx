@@ -199,7 +199,7 @@ const Home = () => {
           },
         }}
         contentLabel=""
-        className="w-[40%] max-h-3/4 rounded-md bg-white mx-auto mt-14 p-5 overflow-scroll"
+        className=" w-[90%] sm:w-[40%] max-h-3/4 rounded-md bg-white mx-auto mt-14 p-5 overflow-scroll"
       >
         <AddEditNotes
           type={openAddEditModal.type}
