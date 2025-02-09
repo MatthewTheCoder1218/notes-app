@@ -8,11 +8,12 @@ import {
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+import Landing from "./pages/Landing/Landing";
 
 const routes = (
   <Router>
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" exact element={<Landing />} />
       <Route path="/dashboard" exact element={<Home />} />
       <Route path="/login" exact element={<Login />} />
       <Route path="/signup" exact element={<Signup />} />
