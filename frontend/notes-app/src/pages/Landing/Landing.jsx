@@ -12,7 +12,7 @@ const Landing = () => {
         </p>
         <button disabled="disabled">Try now for free</button>
       </div>
-      <img src={Image} alt="" />
+      <img src={Image} alt="demo image" className="w-50px" />
     </div>
   );
 };
